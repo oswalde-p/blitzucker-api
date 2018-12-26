@@ -12,6 +12,7 @@
   "dependencies": {
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
+    "moment": "^2.23.0",
     "mongoose": "^5.4.0",
     "morgan": "^1.9.1"
   }
