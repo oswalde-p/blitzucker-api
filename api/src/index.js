@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
+const cors = require('cors')
 const userRouter = require('./routes/users')
 
 const bodyParser = require('body-parser')
@@ -11,6 +12,7 @@ const mongooseConnectionString = process.env.mongoose || 'mongodb://localhost:27
 const app = express()
 
 app.use(morgan('tiny'))
+app.use(cors())
 
 app.use(bodyParser.json())
 app.use(cookieParser())

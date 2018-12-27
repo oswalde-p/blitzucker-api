@@ -9,7 +9,7 @@ router.get('/', async function(req, res) {
   res.send(users)
 })
 
-router.get('/history/', async function(req, res) {
+router.post('/history/', async function(req, res) {
   const {email} = req.body
   if (email) {
     const user = await User.findOne({email})
