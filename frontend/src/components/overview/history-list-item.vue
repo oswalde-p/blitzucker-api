@@ -1,13 +1,29 @@
 <script>
   export default {
     name: 'HistoryListItem',
-    data() {},
+    data() {
+      return {};
+    },
+    props: {
+      event,
+      date: {
+        type: Boolean,
+        required: true,
+      },
+    },
   };
 </script>
 
 <template lang='pug'>
-  .history-list-item Placeholder list item
+  .log-item-container
+    .dateSeperator(v-if="date") {{ event.time }}
+    span.category {{ event.subtype }}
+    span.value {{ event.value }}
 </template>
 
 <style>
+
+.log-item-container {
+
+}
 </style>

@@ -1,7 +1,8 @@
 <script>
-
 import HistoryChart from './history-chart';
 import HistoryList from './history-list';
+
+const axios = require('axios');
 
 export default {
   name: 'Overview',
@@ -11,8 +12,21 @@ export default {
   },
   data() {
     return {
-      msg: 'Welcome to Your Vue.js PWA',
+      history: [],
+      email: 'example2@test.com', // TODO: fix this,
+      apiInstance: axios.create({
+        baseURL: 'http://localhost:3001/api',
+      }),
     };
+  },
+  async created() {
+    this.history = await this.fetchHistory(this.email);
+  },
+  methods: {
+    async fetchHistory(email) {
+      const response = await this.apiInstance.post('/users/history', { email });
+      return response.data;
+    },
   },
 };
 </script>
@@ -20,7 +34,7 @@ export default {
 <template lang='pug'>
   #overview
     history-chart
-    history-list
+    history-list(:history='history')
 </template>
 
 <style>
