@@ -11,6 +11,7 @@ router.get('/', async function(req, res) {
 
 router.post('/history/', async function(req, res) {
   const {email} = req.body
+  console.log(req.body)
   if (email) {
     const user = await User.findOne({email})
     if (user){

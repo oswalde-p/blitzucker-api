@@ -1,13 +1,39 @@
 <script>
-  export default {
-    name: 'HistoryListItem',
-    data() {},
-  };
+import IconSquare from '../icon-square';
+
+export default {
+  name: 'HistoryListItem',
+  data() {
+    return {};
+  },
+  components: {
+    IconSquare,
+  },
+  props: {
+    event,
+  },
+};
 </script>
 
 <template lang='pug'>
-  .history-list-item Placeholder list item
+  li.log-item-container
+    span.time {{ event.time.slice(11,16)}}
+    span.value {{ event.value }}
+      IconSquare.icon(:name='event.subtype', :size='20')
 </template>
 
-<style>
+<style lang='scss' scoped>
+@import '../../style/_colors.scss';
+
+.log-item-container {
+  padding: 2rem;
+}
+
+.time {
+  float: left;
+}
+
+.value, .icon {
+  float: right;
+}
 </style>
