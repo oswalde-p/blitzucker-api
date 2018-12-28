@@ -12,7 +12,7 @@ export default {
     };
   },
   props: {
-    history: {
+    history: { // TODO: filter history events to display based on user preferences
       type: Array,
       required: true,
     },
@@ -35,10 +35,11 @@ export default {
 
 <template lang='pug'>
   #history-list
-    ul
+    ul(v-if='history && history.length > 0')
       template(v-for='event in history')
         li.dateSeperator(v-if='firstTimes.includes(event.time)') {{ event.time.slice(0,10) }}
         HistoryListItem(:event='event')
+    div(v-else) No records to display
 </template>
 
 <style  lang='scss' scoped>

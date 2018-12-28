@@ -1,20 +1,25 @@
 <script>
-  export default {
-    name: 'HistoryListItem',
-    data() {
-      return {};
-    },
-    props: {
-      event,
-    },
-  };
+import IconSquare from '../icon-square';
+
+export default {
+  name: 'HistoryListItem',
+  data() {
+    return {};
+  },
+  components: {
+    IconSquare,
+  },
+  props: {
+    event,
+  },
+};
 </script>
 
 <template lang='pug'>
   li.log-item-container
     span.time {{ event.time.slice(11,16)}}
-    span.category {{ event.subtype }}
     span.value {{ event.value }}
+      IconSquare.icon(:name='event.subtype', :size='20')
 </template>
 
 <style lang='scss' scoped>
@@ -28,7 +33,7 @@
   float: left;
 }
 
-.value {
+.value, .icon {
   float: right;
 }
 </style>
