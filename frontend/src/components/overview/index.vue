@@ -32,20 +32,46 @@ export default {
 </script>
 
 <template lang='pug'>
-  #overview
+  main#overview
     history-chart
     history-list(:history='history')
+    .submit-new-button
+      router-link( to='/newEntry')  +
 </template>
 
-<style>
+<style lang='scss' scoped>
+@import '../../style/_colors.scss';
 
 #overview {
   width: 100%;
   height: 100%;
+  margin: 0;
 }
 
 #history-chart {
   width: 100%;
   height: 40%;
+}
+
+#history-list {
+  width: 100%;
+  height: 60%;
+}
+
+.submit-new-button {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  float: right;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  background-color: $secondary;
+  font-size: 3.5rem;
+  text-align: center;
+  a {
+    text-decoration: none;
+    color: white;
+  }
 }
 </style>
