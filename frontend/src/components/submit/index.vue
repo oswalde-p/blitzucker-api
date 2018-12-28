@@ -1,17 +1,25 @@
 <script>
 import TypeSelector from './type-selector';
+import NewEntryForm from './form';
 
 export default {
   name: 'NewEntry',
   components: {
     TypeSelector,
+    NewEntryForm,
+  },
+  data() {
+    return {
+      active: null,
+    };
   },
 };
 </script>
 
 <template lang="pug">
   section
-    TypeSelector.type-selector
+    TypeSelector.type-selector(v-on:update-active="active = $event")
+    NewEntryForm( :active="this.active")
     .floating-action-button
       router-link( to='/overview')  &#10003;
 </template>

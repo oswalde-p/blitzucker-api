@@ -14,6 +14,7 @@ export default {
   },
   created() {
     this.activeCategory = this.favourites[0];
+    this.$emit('update-active', this.activeCategory);
   },
   methods: {
     updateActiveCategory(newCategory) {
