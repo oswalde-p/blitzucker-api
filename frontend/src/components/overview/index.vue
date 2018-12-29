@@ -32,20 +32,31 @@ export default {
 </script>
 
 <template lang='pug'>
-  #overview
+  main#overview
     history-chart
     history-list(:history='history')
+    .floating-action-button
+      router-link( to='/newEntry')  +
 </template>
 
-<style>
+<style lang='scss' scoped>
+@import '../../style/_colors.scss';
+@import '../../style/_common.scss';
 
 #overview {
   width: 100%;
   height: 100%;
+  margin: 0;
 }
 
 #history-chart {
   width: 100%;
   height: 40%;
 }
+
+#history-list {
+  width: 100%;
+  height: 60%;
+}
+
 </style>
