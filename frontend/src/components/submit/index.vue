@@ -2,6 +2,8 @@
 import TypeSelector from './type-selector';
 import FormPart from './form-part';
 
+const moment = require('moment');
+
 const axios = require('axios');
 
 export default {
@@ -51,7 +53,7 @@ export default {
       return obj
     },
     combineDateTime(date, time) {
-      return new Date(date + time) // TODO implement this properly
+      return moment(date+'T'+time, 'YYYY-MM-DDTHH:mm', true)
     },
     updateActiveCategory(active){
       this.activeCategory = active;
