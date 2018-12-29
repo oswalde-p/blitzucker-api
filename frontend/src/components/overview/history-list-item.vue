@@ -1,6 +1,8 @@
 <script>
 import IconSquare from '../icon-square';
 
+const moment = require('moment');
+
 export default {
   name: 'HistoryListItem',
   data() {
@@ -12,12 +14,18 @@ export default {
   props: {
     event,
   },
+  methods: {
+    getLocalTime(timeIso) {
+      const time = moment(timeIso);
+      return time.format('HH:mm');
+    },
+  },
 };
 </script>
 
 <template lang='pug'>
   li.log-item-container
-    span.time {{ event.time.slice(11,16)}}
+    span.time {{ getLocalTime(event.time)}}
     span.value {{ event.value }}
       IconSquare.icon(:name='event.subtype', :size='20')
 </template>
