@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const User = require('../models/user')
-const { isValidHistoryEvent } = require('../helpers')
+const { isValidHistoryEvent, timeComparatorNewestFirst } = require('../helpers')
 
 //TODO add authorisation to appropriate functions
 
@@ -14,6 +14,8 @@ router.post('/history/', async function(req, res) {
   if (email) {
     const user = await User.findOne({email})
     if (user){
+      let history = user.history
+      history.sort(timeComparatorNewestFirst)
       return res.send(user.history)
     } else {
       return res.status(400).send('User not found')
@@ -42,12 +44,13 @@ router.post('/history/add/', async function(req, res){
 
   User.updateOne({email}, {$push: {history: valid}})
     .exec((err, user) => {
-        if (!err) {
-            res.send(200)
-          } else {
-            res.sendStatus(400)
-          }
-      })
+      if (!err) {
+          res.send(200)
+        } else {
+          res.sendStatus(400)
+        }
+    })
 })
+
 
 module.exports = router
