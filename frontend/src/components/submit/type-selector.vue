@@ -5,9 +5,13 @@ export default {
   name: 'TypeSelector',
   data() {
     return {
-      favourites: ['bgl', 'novo', 'lantus', 'perindopril'], // TODO: pass these as prop based on actual prefs
       activeCategory: null,
     };
+  },
+  props: {
+    favourites: {
+      required: true,
+    },
   },
   components: {
     IconSquare,

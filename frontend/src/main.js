@@ -5,7 +5,7 @@ import Vuex from 'vuex';
 import App from './App';
 import router from './router';
 import strings from '../config/strings';
-import eventTypes from '../config/event-types';
+import subtypeDetails from '../config/subtype-details';
 
 Vue.config.productionTip = false;
 Vue.use(Vuex);
@@ -13,7 +13,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     strings,
-    eventTypes,
+    subtypeDetails,
     greeting: 'Howdy ;)',
   },
 });
