@@ -2,7 +2,7 @@ const moment = require('moment')
 
 const isValidHistoryEvent = function (obj) {
   const mandatoryKeys = ['type', 'subtype', 'value', 'time']
-  const validTypes = ['READING', 'BGL', 'INSULIN', 'PILLS', 'ACTIVITY', 'TRANSACTION']
+  const validTypes = ['READING', 'BGL', 'INSULIN', 'PILL', 'ACTIVITY', 'TRANSACTION']
 
   for (let key of mandatoryKeys) {
     if (!obj[key]) return false
