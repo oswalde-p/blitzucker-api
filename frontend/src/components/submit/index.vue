@@ -17,7 +17,7 @@ export default {
       favourites: ['bgl', 'novo', 'lantus', 'perindopril'], // TODO: pass these as prop based on actual prefs
       activeCategory: null,
       enteredData: {},
-      email: 'example2@test.com', // TODO: fix this,
+      email: 'test-user@test.com', // TODO: fix this,
     };
   },
   created() {
