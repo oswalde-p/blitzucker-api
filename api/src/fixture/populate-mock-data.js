@@ -2,7 +2,11 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const moment = require('moment')
 
-const mongooseConnectionString = process.env.mongoose || 'mongodb://localhost:27017/d6s'
+require('dotenv').config()
+
+const mongooseConnectionString = process.env.MONGO_CONNECTION_STRING || 'mongodb://localhost:27017/d6s'
+
+console.log(mongooseConnectionString)
 
 mongoose.connect(mongooseConnectionString,async function(err){
   if (err) {
@@ -11,7 +15,7 @@ mongoose.connect(mongooseConnectionString,async function(err){
   } else {
     console.log('Mongo connection successful')
 
-    const user = new User( {email: "example2@test.com", password: "password123" })
+    const user = new User( {email: "test-user@test.com", password: "password123" })
     addRandomHistory(user)
     user.validate()
     await user.save()
