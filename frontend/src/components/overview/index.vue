@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       history: [],
-      email: 'example2@test.com', // TODO: fix this,
+      email: 'test-user@test.com', // TODO: fix this,
       apiInstance: axios.create({
         baseURL: 'http://localhost:3001/api',
       }),

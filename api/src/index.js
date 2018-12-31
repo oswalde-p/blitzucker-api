@@ -7,9 +7,13 @@ const userRouter = require('./routes/users')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
-const PORT = process.env.PORT || 3001
-const mongooseConnectionString = process.env.mongoose || 'mongodb://localhost:27017/d6s'
+const config = require('./config')
+
+const PORT = config.PORT
+const mongooseConnectionString = config.MONGO_CONNECTION_STRING
 const app = express()
+
+console.log(mongooseConnectionString)
 
 app.use(morgan('tiny'))
 app.use(cors())
