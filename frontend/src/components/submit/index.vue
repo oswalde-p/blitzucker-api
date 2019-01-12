@@ -82,6 +82,7 @@ export default {
     .title
       span.date( :click="editDateMode=true") {{ date }}
       span.time(:click = "editTimeMode=true") {{ time }}
+    TypeSelector(:favourites="favourites")
     .floating-action-button(@click="submitAndExit") &#10003;
 </template>
 
@@ -89,13 +90,21 @@ export default {
 @import '../../style/_common.scss';
 @import '../../style/_colors.scss';
 
+html {
+  width: 100%;
+  height: 100%;
+}
+
 section {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 .title {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid $grey;
+  background-color: $primaryDark;
+  color: white;
   font-size: 2rem;
   padding: 10px;
 }
@@ -106,6 +115,13 @@ section {
 
 .cancel {
   font-size: 2rem;
+}
+
+.type-selector {
+  position: absolute;
+  right: -5em;
+  bottom: -5em;
+  overflow: hidden;
 }
 
 
