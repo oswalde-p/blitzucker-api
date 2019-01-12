@@ -2,9 +2,9 @@
   export default {
     name: 'HistoryChart',
     data() {
-      return {};
-    },
-  };
+      return {}
+    }
+  }
 </script>
 
 <template lang='pug'>

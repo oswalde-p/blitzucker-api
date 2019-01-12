@@ -1,32 +1,32 @@
 <script>
-import IconSquare from '../icon-square';
+import IconSquare from '../icon-square'
 
 export default {
   name: 'TypeSelector',
   data() {
     return {
-      activeCategory: null,
-    };
+      activeCategory: null
+    }
   },
   props: {
     favourites: {
-      required: true,
-    },
+      required: true
+    }
   },
   components: {
-    IconSquare,
+    IconSquare
   },
   created() {
-    this.activeCategory = this.favourites[0];
-    this.$emit('update-active', this.activeCategory);
+    this.activeCategory = this.favourites[0]
+    this.$emit('update-active', this.activeCategory)
   },
   methods: {
     updateActiveCategory(newCategory) {
-      this.activeCategory = newCategory;
-      this.$emit('update-active', newCategory);
-    },
-  },
-};
+      this.activeCategory = newCategory
+      this.$emit('update-active', newCategory)
+    }
+  }
+}
 
 </script>
 

@@ -1,36 +1,36 @@
 <script>
-import HistoryListItem from './history-list-item';
+import HistoryListItem from './history-list-item'
 
 export default {
   name: 'HistoryList',
   components: {
-    HistoryListItem,
+    HistoryListItem
   },
   data() {
     return {
-      currentDate: null,
-    };
+      currentDate: null
+    }
   },
   props: {
     history: { // TODO: filter history events to display based on user preferences
       type: Array,
-      required: true,
-    },
+      required: true
+    }
   },
   computed: {
     firstTimes() { // used to determine which events should be preceded by a date seperator
-      const times = [];
-      let lastSeenDate = '';
+      const times = []
+      let lastSeenDate = ''
       this.history.forEach((e) => {
         if (e.time.slice(0, 10) !== lastSeenDate) {
-          times.push(e.time);
-          lastSeenDate = e.time.slice(0, 10);
+          times.push(e.time)
+          lastSeenDate = e.time.slice(0, 10)
         }
-      });
-      return times;
-    },
-  },
-};
+      })
+      return times
+    }
+  }
+}
 </script>
 
 <template lang='pug'>

@@ -1,26 +1,26 @@
 <script>
-import IconSquare from '../icon-square';
+import IconSquare from '../icon-square'
 
-const moment = require('moment');
+const moment = require('moment')
 
 export default {
   name: 'HistoryListItem',
   data() {
-    return {};
+    return {}
   },
   components: {
-    IconSquare,
+    IconSquare
   },
   props: {
-    event,
+    event
   },
   methods: {
     getLocalTime(timeIso) {
-      const time = moment(timeIso);
-      return time.format('HH:mm');
-    },
-  },
-};
+      const time = moment(timeIso)
+      return time.format('HH:mm')
+    }
+  }
+}
 </script>
 
 <template lang='pug'>

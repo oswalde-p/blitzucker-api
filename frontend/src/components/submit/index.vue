@@ -1,16 +1,16 @@
 <script>
-import TypeSelector from './type-selector';
-import FormPart from './form-part';
+import TypeSelector from './type-selector'
+import FormPart from './form-part'
 
-const moment = require('moment');
+const moment = require('moment')
 
-const axios = require('axios');
+const axios = require('axios')
 
 export default {
   name: 'NewEntry',
   components: {
     TypeSelector,
-    FormPart,
+    FormPart
   },
   data() {
     return {
@@ -18,10 +18,22 @@ export default {
       activeCategory: null,
       enteredData: {},
       email: 'test-user@test.com', // TODO: fix this,
-    };
+      dateTime: moment(),
+      editDateMode: false,
+      editTimeMode: false
+    }
+  },
+  computed: {
+    time() {
+      return moment(this.dateTime).format('h:mma')
+    },
+    date() {
+      return moment(this.dateTime).format('ddd, Do MMM')
+    }
   },
   created() {
-    this.favourites.forEach(e => this.enteredData[e] = {}); // eslint-disable-line no-return-assign
+    this.favourites.forEach(e => this.enteredData[e] = {}) // eslint-disable-line no-return-assign
+    this.dateTime = new Date()
   },
   methods: {
     submitAndExit() {
@@ -57,6 +69,8 @@ export default {
     },
     updateActiveCategory(active){
       this.activeCategory = active;
+      let x = new Date()
+      x.get
     }
   },
 };
@@ -64,9 +78,10 @@ export default {
 
 <template lang="pug">
   section
-    TypeSelector.type-selector(:favourites="favourites" v-on:update-active="activeCategory = $event" )
-    form
-      FormPart(v-for="category in favourites" :key="category" :ref="category" :category="category" :values="enteredData[category]" v-bind:class="{active: category===activeCategory}")
+    span.cancel(:click="cancel") x
+    .title
+      span.date( :click="editDateMode=true") {{ date }}
+      span.time(:click = "editTimeMode=true") {{ time }}
     .floating-action-button(@click="submitAndExit") &#10003;
 </template>
 
@@ -78,20 +93,21 @@ section {
   height: 100%;
   width: 100%;
 }
-.type-selector {
-  width: 100%;
-  height: 20%;
-  border-bottom: 2px solid $primaryDark;
+
+.title {
+  border-bottom: 2px solid black;
+  font-size: 2rem;
+  padding: 10px;
 }
 
-.form-part {
-  display: none;
-
+.time {
+  float: right;
 }
 
-.active {
-  display: block;
+.cancel {
+  font-size: 2rem;
 }
+
 
 </style>
 

@@ -5,13 +5,15 @@ export default {
   props: {
     category: null,
     values: null,
+    time: null,
+    date: null
   },
   methods: {
     submit() {
       console.log('yay'); //eslint-disable-line
-    },
-  },
-};
+    }
+  }
+}
 
 </script>
 
@@ -21,10 +23,10 @@ export default {
     ul
       li
         label Date
-        input(type="date" v-model="values.date")
+        input(type="date" v-model="date")
       li
         label Time
-        input(type="time" v-model="values.time")
+        input(type="time" v-model="time")
         // TODO: set default value for time
 
       li(v-if="this.$store.state.subtypeDetails[category].parent == 'INSULIN'")

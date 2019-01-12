@@ -1,8 +1,8 @@
 
 <script>
 export default {
-  name: 'app',
-};
+  name: 'app'
+}
 </script>
 
 <template lang='pug'>
