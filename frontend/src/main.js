@@ -10,6 +10,8 @@ import subtypeDetails from '../config/subtype-details';
 Vue.config.productionTip = false;
 Vue.use(Vuex);
 
+console.log(process.env.MESSAGE || 'sad face :('); // eslint-disable-line
+
 const store = new Vuex.Store({
   state: {
     strings,
