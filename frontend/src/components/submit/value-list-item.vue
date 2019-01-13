@@ -4,6 +4,9 @@ export default {
   name: 'ValueListItem',
   props: {
     entry: { type: Object, required: true }
+  },
+  created() {
+    this.$nextTick(() => this.$refs.input.focus())
   }
 }
 </script>
@@ -11,7 +14,7 @@ export default {
 <template lang="pug">
 li
   span.name {{ entry.subtype }}
-  input(type="number" v-model="entry.value")
+  input(type="number" ref="input" v-model="entry.value")
   span.units {{ entry.units }}
 </template>
 

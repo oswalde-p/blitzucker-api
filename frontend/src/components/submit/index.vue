@@ -75,7 +75,7 @@ export default {
       span.date( :click="editDateMode=true") {{ date }}
       span.time(:click = "editTimeMode=true") {{ time }}
     ul#dataList
-      ValueListItem(v-for="entry of enteredData" :entry="entry" )
+      ValueListItem(v-for="entry of enteredData" :key="entry.subtype" :entry="entry" )
     TypeSelector(:favourites="favourites" v-on:add-new="addData")
     .floating-action-button(@click="submitAndExit") &#10003;
 </template>
