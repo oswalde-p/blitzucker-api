@@ -46,6 +46,8 @@ export default {
 @import '../../style/_common.scss';
 div {
   overflow: hidden;
+  width: 15em;
+  height: 15em;
 }
 ul {
   @include on-circle($item-count: 12, $circle-size: 20em, $item-size: 6em, $start-angle: 180);

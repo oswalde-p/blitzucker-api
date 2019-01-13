@@ -116,8 +116,8 @@ section {
 }
 .type-selector {
   position: absolute;
-  right: -5em;
-  bottom: -5em;
+  right: 0;
+  bottom: 0;
   overflow: hidden;
 }
 
