@@ -60,6 +60,9 @@ export default {
         units: this.$store.state.subtypeDetails[category].units
       }
       this.enteredData.push(entryObj)
+    },
+    cancel() {
+      this.$router.push('overview')
     }
   },
 };
@@ -67,7 +70,7 @@ export default {
 
 <template lang="pug">
   section
-    span.cancel(:click="cancel") x
+    router-link( to='/overview') X
     .title
       span.date( :click="editDateMode=true") {{ date }}
       span.time(:click = "editTimeMode=true") {{ time }}
