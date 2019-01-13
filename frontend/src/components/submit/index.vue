@@ -1,6 +1,6 @@
 <script>
 import TypeSelector from './type-selector'
-import FormPart from './form-part'
+import ValueListItem from './value-list-item'
 
 const moment = require('moment')
 
@@ -10,13 +10,13 @@ export default {
   name: 'NewEntry',
   components: {
     TypeSelector,
-    FormPart
+    ValueListItem
   },
   data() {
     return {
       favourites: ['bgl', 'novo', 'lantus', 'perindopril'], // TODO: pass these as prop based on actual prefs
       activeCategory: null,
-      enteredData: {},
+      enteredData: [],
       email: 'test-user@test.com', // TODO: fix this,
       dateTime: moment(),
       editDateMode: false,
@@ -32,7 +32,6 @@ export default {
     }
   },
   created() {
-    this.favourites.forEach(e => this.enteredData[e] = {}) // eslint-disable-line no-return-assign
     this.dateTime = new Date()
   },
   methods: {
@@ -40,37 +39,27 @@ export default {
       /* eslint-disable */
       const api = axios.create({ baseURL: 'http://localhost:3001/api' }); //eslint-disable-line
 
-      let toSend = []
-      const subtypes = Object.keys(this.enteredData)
-      subtypes.forEach(subtype => toSend.push(this.eventObjectAdaptor(subtype, this.enteredData[subtype])))
+    const toSend = this.enteredData.filter( e => e.value).map( entry => {
+      entry.time = this.dateTime
+      return entry
+    })
 
-      toSend = toSend.filter(e => e != null) // don't want to send empty objects
       if (toSend.length > 0) {
         api.post('/users/history/add', {email:this.email, data: toSend})
       }
       // navigate back to overview
       this.$router.push('overview')
     },
-    eventObjectAdaptor(subtype, data) {
-      if (!(data.value || data.comment)){
-        return null
-      }
-      let obj = {}
-      obj.type = this.$store.state.subtypeDetails[subtype].parent
-      obj.subtype = subtype
-      obj.value = data.value
-      obj.comment = data.comment
-      obj.units = this.$store.state.subtypeDetails[subtype].units
-      obj.time = this.combineDateTime(data.date, data.time)
-      return obj
-    },
-    combineDateTime(date, time) {
-      return moment(date+'T'+time, 'YYYY-MM-DDTHH:mm', true)
-    },
     updateActiveCategory(active){
-      this.activeCategory = active;
-      let x = new Date()
-      x.get
+      this.activeCategory = active
+    },
+    addData(category) {
+      const entryObj = {
+        subtype: category,
+        type: this.$store.state.subtypeDetails[category].parent,
+        units: this.$store.state.subtypeDetails[category].units
+      }
+      this.enteredData.push(entryObj)
     }
   },
 };
@@ -82,7 +71,10 @@ export default {
     .title
       span.date( :click="editDateMode=true") {{ date }}
       span.time(:click = "editTimeMode=true") {{ time }}
-    TypeSelector(:favourites="favourites")
+    ul#dataList
+      li(v-for="entry of enteredData")
+        ValueListItem( :entry="entry" )
+    TypeSelector(:favourites="favourites" v-on:add-new="addData")
     .floating-action-button(@click="submitAndExit") &#10003;
 </template>
 
@@ -117,6 +109,9 @@ section {
   font-size: 2rem;
 }
 
+#dataList {
+  padding: 0;
+}
 .type-selector {
   position: absolute;
   right: -5em;

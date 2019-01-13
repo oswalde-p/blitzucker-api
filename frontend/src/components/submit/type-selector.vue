@@ -5,7 +5,7 @@ export default {
   name: 'TypeSelector',
   data() {
     return {
-      activeCategory: null
+      used: {}
     }
   },
   props: {
@@ -18,7 +18,15 @@ export default {
   },
   methods: {
     addNew(category) {
-      this.$emit('add-new', category)
+      if (!this.used[category]) {
+        this.toggleUsed(category)
+        this.$emit('add-new', category)
+      }
+    },
+    toggleUsed(id) {
+      const element = document.getElementById(id)
+      element.classList.add('used')
+      this.used[id] = true
     }
   }
 }
@@ -28,7 +36,7 @@ export default {
 <template lang="pug">
   div.type-selector
     ul
-      li(v-for="category in favourites" @click="addNew(category)" )
+      li(v-for="category in favourites" @click="addNew(category)" :id="category")
         IconSquare(:name="category" :size="30")
 </template>
 
@@ -47,7 +55,7 @@ ul {
 li {
   display: inline-block;
   text-align: center;
-  border: 1.5px solid rgb(207, 207, 207);
+  border: 1.5px solid $pink;
   border-radius: 50%;
   width: 4rem;
   height: 4rem;
@@ -57,12 +65,14 @@ li {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-
   }
 }
 
-.active {
-  border-color: $primaryDark;
+.used {
+  border-color: rgb(207, 207, 207);
+  svg {
+    fill: rgb(124, 124, 124);;
+  }
 }
 
 </style>
