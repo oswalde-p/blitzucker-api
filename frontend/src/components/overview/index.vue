@@ -1,34 +1,34 @@
 <script>
-import HistoryChart from './history-chart';
-import HistoryList from './history-list';
+import HistoryChart from './history-chart'
+import HistoryList from './history-list'
 
-const axios = require('axios');
+const axios = require('axios')
 
 export default {
   name: 'Overview',
   components: {
     HistoryChart,
-    HistoryList,
+    HistoryList
   },
   data() {
     return {
       history: [],
       email: 'test-user@test.com', // TODO: fix this,
       apiInstance: axios.create({
-        baseURL: 'http://localhost:3001/api',
-      }),
-    };
+        baseURL: 'http://localhost:3001/api'
+      })
+    }
   },
   async created() {
-    this.history = await this.fetchHistory(this.email);
+    this.history = await this.fetchHistory(this.email)
   },
   methods: {
     async fetchHistory(email) {
-      const response = await this.apiInstance.post('/users/history', { email });
-      return response.data;
-    },
-  },
-};
+      const response = await this.apiInstance.post('/users/history', { email })
+      return response.data
+    }
+  }
+}
 </script>
 
 <template lang='pug'>

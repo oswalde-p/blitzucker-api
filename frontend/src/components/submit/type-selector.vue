@@ -1,79 +1,80 @@
 <script>
-import IconSquare from '../icon-square';
+import IconSquare from '../icon-square'
 
 export default {
   name: 'TypeSelector',
   data() {
     return {
-      activeCategory: null,
-    };
+      used: {}
+    }
   },
   props: {
     favourites: {
-      required: true,
-    },
+      required: true
+    }
   },
   components: {
-    IconSquare,
-  },
-  created() {
-    this.activeCategory = this.favourites[0];
-    this.$emit('update-active', this.activeCategory);
+    IconSquare
   },
   methods: {
-    updateActiveCategory(newCategory) {
-      this.activeCategory = newCategory;
-      this.$emit('update-active', newCategory);
+    addNew(category) {
+      if (!this.used[category]) {
+        this.toggleUsed(category)
+        this.$emit('add-new', category)
+      }
     },
-  },
-};
+    toggleUsed(id) {
+      const element = document.getElementById(id)
+      element.classList.add('used')
+      this.used[id] = true
+    }
+  }
+}
 
 </script>
 
 <template lang="pug">
-  div
+  div.type-selector
     ul
-      li(v-for="category in favourites" @click="updateActiveCategory(category)" v-bind:class="{active: category===activeCategory}")
-        IconSquare(v-bind:name="category" :size="30")
+      li(v-for="category in favourites" @click="addNew(category)" :id="category")
+        IconSquare(:name="category" :size="30")
 </template>
 
 <style lang="scss" scoped>
 
 @import '../../style/_colors.scss';
+@import '../../style/_common.scss';
 div {
-  text-align: center;
-  position: relative;
+  overflow: hidden;
+  width: 15em;
+  height: 15em;
 }
 ul {
-  width: 100%;
-  list-style-type: none;
+  @include on-circle($item-count: 12, $circle-size: 20em, $item-size: 6em, $start-angle: 180);
   margin: 0;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  padding: 0;
 }
 
 li {
   display: inline-block;
-  border: 1.5px solid rgb(207, 207, 207);
+  text-align: center;
+  border: 1.5px solid $pink;
   border-radius: 50%;
   width: 4rem;
   height: 4rem;
-  margin: 0 0.5rem;
   background-color: rgb(207, 207, 207);
 
   svg {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-
   }
 }
 
-.active {
-  border-color: $primaryDark;
+.used {
+  border-color: rgb(207, 207, 207);
+  svg {
+    fill: rgb(124, 124, 124);;
+  }
 }
 
 </style>
