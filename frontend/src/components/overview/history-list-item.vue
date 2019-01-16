@@ -25,6 +25,7 @@ export default {
 
 <template lang='pug'>
   li.log-item-container
+    IconSquare.edit-icon(name='edit', :size='18')
     span.time {{ getLocalTime(event.time)}}
     span.value {{ event.value }}
       IconSquare.icon(:name='event.subtype', :size='20')
@@ -41,7 +42,14 @@ export default {
   float: left;
 }
 
-.value, .icon {
+.edit-icon {
+  float: left;
+  margin-right: 1rem;
+}
+.value {
   float: right;
+  .icon {
+    float: right;
+  }
 }
 </style>
