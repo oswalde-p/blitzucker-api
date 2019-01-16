@@ -18,8 +18,9 @@ const routes = [
     component: Overview
   },
   {
-    path: '/newEntry',
-    name: 'New Entry',
+    path: '/editEntry/:id',
+    name: 'EditEntry',
+    props: true,
     component: Submit
   }
 ]

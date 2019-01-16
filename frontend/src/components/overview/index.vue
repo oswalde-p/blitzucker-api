@@ -36,7 +36,7 @@ export default {
     history-chart
     history-list(:history='history')
     .floating-action-button
-      router-link( to='/newEntry')  +
+      router-link( :to='{ name: "EditEntry"}')  +
 </template>
 
 <style lang='scss' scoped>

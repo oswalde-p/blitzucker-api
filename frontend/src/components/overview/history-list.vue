@@ -36,9 +36,9 @@ export default {
 <template lang='pug'>
   #history-list
     ul(v-if='history && history.length > 0')
-      template(v-for='event in history')
-        li.dateSeperator(v-if='firstTimes.includes(event.time)') {{ event.time.slice(0,10) }}
-        HistoryListItem(:event='event')
+      template(v-for='entry in history')
+        li.dateSeperator(v-if='firstTimes.includes(entry.time)') {{ entry.time.slice(0,10) }}
+        HistoryListItem(:entry='entry')
     div(v-else) No records to display
 </template>
 
@@ -53,6 +53,7 @@ li {
   border-bottom: 1px solid $primaryDark;
 }
 .dateSeperator {
+  font-size: 1.5rem;
   margin: 0;
   color: $white;
   background: $primaryDark;

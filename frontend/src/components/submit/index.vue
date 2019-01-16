@@ -12,6 +12,9 @@ export default {
     TypeSelector,
     ValueListItem
   },
+  props: {
+    entry: { type: Object, required: false }
+  },
   data() {
     return {
       favourites: ['bgl', 'novo', 'lantus', 'perindopril'], // TODO: pass these as prop based on actual prefs
@@ -32,7 +35,12 @@ export default {
     }
   },
   created() {
-    this.dateTime = new Date()
+    if (this.entry) {
+      this.dateTime = new Date(this.entry.time)
+      this.enteredData = [this.entry]
+    } else {
+      this.dateTime = new Date()
+    }
   },
   methods: {
     submitAndExit() {
