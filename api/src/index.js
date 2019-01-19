@@ -13,8 +13,6 @@ const PORT = config.PORT
 const mongooseConnectionString = config.MONGO_CONNECTION_STRING
 const app = express()
 
-console.log(mongooseConnectionString)
-
 app.use(morgan('tiny'))
 app.use(cors())
 
@@ -24,7 +22,7 @@ app.use(cookieParser())
 app.disable('x-powered-by')
 
 //mongoose
-mongoose.connect(mongooseConnectionString, err => {
+mongoose.connect(mongooseConnectionString, {useNewUrlParser: true},  err => {
   if (err) {
     console.log('Error connecting to mongodb')
     console.error(err)
