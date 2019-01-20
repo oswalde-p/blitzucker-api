@@ -47,13 +47,13 @@ export default {
       /* eslint-disable */
       const api = axios.create({ baseURL: 'http://localhost:3001/api' }); //eslint-disable-line
 
-    const toSend = this.enteredData.filter( e => e.value).map( entry => {
-      entry.time = this.dateTime
-      return entry
-    })
+      const toSend = this.enteredData.filter( e => e.value).map( entry => {
+        entry.time = this.dateTime
+        return entry
+      })
 
       if (toSend.length > 0) {
-        api.post('/users/history/add', {email:this.email, data: toSend})
+        api.post('/users/history/update', {email:this.email, data: toSend})
       }
       // navigate back to overview
       this.$router.push('overview')

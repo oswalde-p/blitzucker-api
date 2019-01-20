@@ -25,11 +25,15 @@ router.post('/history/', async function(req, res) {
   res.send(400)
 })
 
-router.post('/history/add/', async function(req, res){
-  const { email, data } = req.body
+router.post('/history/update/', async function(req, res){
+  const { email, data} = req.body
+  console.log(data)
   try {
-    res.send(await User.updateHistory(email, data))
+    const user = await User.findOne({email}).populate('history').exec()
+    await user.updateHistory(email, data)
+    res.send(user.history)
   } catch(err) {
+    console.error(err)
     res.send(400)
   }
 })
