@@ -13,7 +13,6 @@ export default {
   },
   props: {
     history: { // TODO: filter history events to display based on user preferences
-      type: Array,
       required: true
     }
   },

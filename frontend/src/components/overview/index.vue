@@ -12,7 +12,7 @@ export default {
   },
   data() {
     return {
-      history: [],
+      history,
       email: 'test-user@test.com', // TODO: fix this,
       apiInstance: axios.create({
         baseURL: 'http://localhost:3001/api'
@@ -20,7 +20,9 @@ export default {
     }
   },
   async created() {
-    this.history = await this.fetchHistory(this.email)
+    setTimeout(async () => {
+      this.history = await this.fetchHistory(this.email)
+    }, 400)
   },
   methods: {
     async fetchHistory(email) {

@@ -43,7 +43,7 @@ export default {
     }
   },
   methods: {
-    submitAndExit() {
+    async submitAndExit() {
       /* eslint-disable */
       const api = axios.create({ baseURL: 'http://localhost:3001/api' }); //eslint-disable-line
 
@@ -53,10 +53,10 @@ export default {
       })
 
       if (toSend.length > 0) {
-        api.post('/users/history/update', {email:this.email, data: toSend})
+        const history = api.post('/users/history/update', {email:this.email, data: toSend})
       }
       // navigate back to overview
-      this.$router.push('overview')
+      this.$router.push({name:'Overview'})
     },
     updateActiveCategory(active){
       this.activeCategory = active

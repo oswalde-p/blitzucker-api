@@ -30,11 +30,11 @@ router.post('/history/update/', async function(req, res){
   console.log(data)
   try {
     const user = await User.findOne({email}).populate('history').exec()
-    await user.updateHistory(email, data)
-    res.send(user.history)
+    const history = await user.updateHistory(email, data, res)
+    // res.send(history)
   } catch(err) {
     console.error(err)
-    res.send(400)
+    res.sendStatus(400)
   }
 })
 

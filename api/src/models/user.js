@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
   history: [{type:mongoose.Schema.Types.ObjectId, ref: 'Entry'}]
 })
 
-UserSchema.methods.updateHistory = async function(email, entries, update=false) {
+UserSchema.methods.updateHistory = async function(email, entries, res) {
   if (!email){
     throw new Error('Missing user email')
   }
@@ -28,11 +28,13 @@ UserSchema.methods.updateHistory = async function(email, entries, update=false) 
       await existingEntry.save()
     } else {
       const newEntry = new Entry(entry)
-      await newEntry.save()
+      newEntry.save()
       this.history.push(newEntry)
-      await this.save()
+      this.save()
     }
   })
+  // return this.history
+  res.send(this.history)
 }
 
 module.exports = mongoose.model('User', UserSchema)
