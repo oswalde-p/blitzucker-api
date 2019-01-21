@@ -8,7 +8,8 @@ export default {
     }
   },
   created() {
-    this.svgId = this.$store.state.subtypeDetails[this.name].icon
+    this.svgId = this.$store.state.subtypeDetails[this.name] ?
+      this.$store.state.subtypeDetails[this.name].icon : this.name
   },
   props: {
     name: {

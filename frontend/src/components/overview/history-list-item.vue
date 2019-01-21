@@ -12,7 +12,7 @@ export default {
     IconSquare
   },
   props: {
-    event
+    entry: { required: true }
   },
   methods: {
     getLocalTime(timeIso) {
@@ -25,9 +25,11 @@ export default {
 
 <template lang='pug'>
   li.log-item-container
-    span.time {{ getLocalTime(event.time)}}
-    span.value {{ event.value }}
-      IconSquare.icon(:name='event.subtype', :size='20')
+    router-link( :to='{name: "EditEntry", params: { entry: entry }}')
+      IconSquare.edit-icon(name='edit', :size='18')
+    span.time {{ getLocalTime(entry.time)}}
+    span.value {{ entry.value }}
+      IconSquare.icon(:name='entry.subtype', :size='20')
 </template>
 
 <style lang='scss' scoped>
@@ -35,13 +37,25 @@ export default {
 
 .log-item-container {
   padding: 2rem;
+  font-size: 1.5rem;
 }
 
 .time {
   float: left;
 }
 
-.value, .icon {
+router-link {
+  min-width: 50px;
+}
+
+.edit-icon {
+  float: left;
+  margin-right: 1rem;
+}
+.value {
   float: right;
+  .icon {
+    float: right;
+  }
 }
 </style>

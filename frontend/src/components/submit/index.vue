@@ -12,6 +12,9 @@ export default {
     TypeSelector,
     ValueListItem
   },
+  props: {
+    entry: { type: Object, required: false }
+  },
   data() {
     return {
       favourites: ['bgl', 'novo', 'lantus', 'perindopril'], // TODO: pass these as prop based on actual prefs
@@ -32,23 +35,28 @@ export default {
     }
   },
   created() {
-    this.dateTime = new Date()
+    if (this.entry) {
+      this.dateTime = new Date(this.entry.time)
+      this.enteredData = [this.entry]
+    } else {
+      this.dateTime = new Date()
+    }
   },
   methods: {
-    submitAndExit() {
+    async submitAndExit() {
       /* eslint-disable */
       const api = axios.create({ baseURL: 'http://localhost:3001/api' }); //eslint-disable-line
 
-    const toSend = this.enteredData.filter( e => e.value).map( entry => {
-      entry.time = this.dateTime
-      return entry
-    })
+      const toSend = this.enteredData.filter( e => e.value).map( entry => {
+        entry.time = this.dateTime
+        return entry
+      })
 
       if (toSend.length > 0) {
-        api.post('/users/history/add', {email:this.email, data: toSend})
+        const history = api.post('/users/history/update', {email:this.email, data: toSend})
       }
       // navigate back to overview
-      this.$router.push('overview')
+      this.$router.push({name:'Overview'})
     },
     updateActiveCategory(active){
       this.activeCategory = active
