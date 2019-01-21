@@ -27,7 +27,6 @@ router.post('/history/', async function(req, res) {
 
 router.post('/history/update/', async function(req, res){
   const { email, data} = req.body
-  console.log(data)
   try {
     const user = await User.findOne({email}).populate('history').exec()
     const history = await user.updateHistory(email, data, res)
