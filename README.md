@@ -1,21 +1,21 @@
-# d6s
+# blitzucker
 A connected diabetes management platform, combining data from a range of sources to give you optimal 
-control over your health and wellbeing
+control over your health. The ultimate goal is to use *machine learning* (🤮) to make predictions and spot trends better than your shitty brain can.
 
-## Project structure
+The project currently consists of 2 parts: this api and a [web frontend](https://github.com/oswalde-p/blitzucker-vue-client).
 
-The project currently consists of 2 node applications, `api` and `frontend`.
+## api
 
-### api
-
-### frontend
+An express server responsible for handling requests from various clients, fetching data from external sources and keeping the database up to date. You know, like an api.
 
 ## Data sources
 
-Data for a range of types of informations is collected. Users can specify which types of data are presented
-
 ### Sensors + Medication
-Entered manually through the client or ...
+Entered manually through a UI client or automatically from things like NFC relay apps. Historical data can be imported from other diabetes logging apps.
+
+### Drugs!
+
+Go low as you get high? Find out! As far as I know, this is the first diabetes management product with support for recreational drugs. Now you'll finally be able to spot patterns of highs from the munchies, lows from not eating for 8 hours after that sugar cube, or whatever the fuck ketamine does...
 
 ### Activity
 Fitbit and Google Fit APIs
