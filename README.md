@@ -8,6 +8,8 @@ The project currently consists of 2 parts: this api and a [web frontend](https:/
 
 An express server responsible for handling requests from various clients, fetching data from external sources and keeping the database up to date. You know, like an api.
 
+It is currently hosted by openshift [here](https://blitzucker-api-blutzucker.1d35.starter-us-east-1.openshiftapps.com/api/~/liveness)
+
 ## Data sources
 
 ### Sensors + Medication
