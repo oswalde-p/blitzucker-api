@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const cors = require('cors')
 const userRouter = require('./routes/users')
+const https = require('https')
+const fs = require('fs')
 
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
@@ -26,6 +28,7 @@ app.disable('x-powered-by')
 mongoose.connect(mongooseConnectionString, {useNewUrlParser: true},  err => {
   if (err) {
     console.log('Error connecting to mongodb')
+    console.log(`String: ${mongooseConnectionString}`)
     console.error(err)
   } else {
     console.log('Mongo connection successful')
@@ -42,4 +45,11 @@ app.get('/api/~/liveness', (_, res) => {
 app.use('/api/users', userRouter)
 
 
-app.listen(PORT, r => { console.log(`Server listening on port ${PORT}`)})
+// app.listen(3000, r => { console.log(`Server listening on port ${PORT}`)})
+
+const options = {
+  key: fs.readFileSync('src/ssl/server.key'),
+  cert: fs.readFileSync('src/ssl/server.cert')
+};
+
+https.createServer(options, app).listen(PORT,() => console.log('Listening on port ' + PORT))
