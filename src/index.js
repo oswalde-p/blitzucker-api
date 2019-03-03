@@ -3,7 +3,6 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const cors = require('cors')
-const userRouter = require('./routes/users')
 const https = require('https')
 const fs = require('fs')
 
@@ -11,6 +10,8 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
 const config = require('./config')
+const userRouter = require('./routes/user-router')
+const historyRouter = require('./routes/history-router')
 
 const PORT = config.PORT
 const mongooseConnectionString = config.MONGO_CONNECTION_STRING
@@ -43,13 +44,14 @@ app.get('/api/~/liveness', (_, res) => {
 })
 
 app.use('/api/users', userRouter)
+app.use('/api/history', historyRouter)
 
 
-// app.listen(3000, r => { console.log(`Server listening on port ${PORT}`)})
+app.listen(PORT, r => { console.log(`Server listening on port ${PORT}`)})
 
-const options = {
-  key: fs.readFileSync('src/ssl/server.key'),
-  cert: fs.readFileSync('src/ssl/server.cert')
-};
+// const options = {
+//   key: fs.readFileSync('src/ssl/server.key'),
+//   cert: fs.readFileSync('src/ssl/server.cert')
+// };
 
-https.createServer(options, app).listen(PORT,() => console.log('Listening on port ' + PORT))
+// https.createServer(options, app).listen(PORT,() => console.log('Listening on port ' + PORT))
