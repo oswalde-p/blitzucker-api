@@ -42,12 +42,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
-app.get('/', (req, res) => {
-  const id = req.sessionID
-  res.send(`hoooooome! id: ${id}\n`)
-})
-
-
 app.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
@@ -57,7 +51,7 @@ app.post('/login', (req, res, next) => {
       if(err) {
         return res.status(400).send(info.message)
       }
-      return res.send('You were authenticated & logged in!\n');
+      return res.status(200).send('Login successful');
     })
   })(req, res, next);
 })

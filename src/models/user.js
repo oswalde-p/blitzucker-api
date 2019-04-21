@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
   isAdmin: { type: Boolean, required: true, default: false},
-  passwordHash: {
+  password: {
     type: String,
     required: true
   },

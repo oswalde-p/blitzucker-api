@@ -8,7 +8,7 @@ const mongooseConnectionString = process.env.MONGO_CONNECTION_STRING || 'mongodb
 
 console.log(mongooseConnectionString)
 
-mongoose.connect(mongooseConnectionString,async function(err){
+mongoose.connect(mongooseConnectionString, async function(err){
   if (err) {
     console.log('Error connecting to mongodb')
     console.error(err)
@@ -16,7 +16,7 @@ mongoose.connect(mongooseConnectionString,async function(err){
     console.log('Mongo connection successful')
 
     const user = new User( {email: "test-user@test.com", password: "password123" })
-    addRandomHistory(user)
+    //addRandomHistory(user)
     user.validate()
     await user.save()
     console.log('done')

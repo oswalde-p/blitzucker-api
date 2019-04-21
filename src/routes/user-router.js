@@ -7,6 +7,7 @@ const userService = require('../services/user-service')
 //TODO add authorisation to appropriate functions
 
 router.get('/', async function(req, res) {
+  console.log('inside user request handler')
   const users = await User.find()
   res.send(users)
 })
