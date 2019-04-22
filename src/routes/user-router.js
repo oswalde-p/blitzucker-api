@@ -26,16 +26,4 @@ router.post('/', async function(req, res, next) {
   }
 })
 
-router.post('/login', async function(req, res, next) {
-  const { email, password } = req.body
-  if (!(email && password)) return res.sendStatus(400)
-  try {
-    const success = await userService.comparePassword(email, password)
-    if (success) return res.sendStatus(200)
-    else return res.sendStatus(400)
-  } catch(err) {
-    next(err)
-  }
-})
-
 module.exports = router

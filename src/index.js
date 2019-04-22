@@ -62,8 +62,8 @@ app.get('/-/liveness', (_, res) => {
   res.sendStatus(500)
 })
 
-app.use('/users', auth, userRouter)
-app.use('/history', auth, historyRouter)
+app.use('/users', auth['admin'], userRouter)
+app.use('/history', auth['user'], historyRouter)
 
 
 app.listen(PORT, r => { console.log(`Server listening on port ${PORT}`)})

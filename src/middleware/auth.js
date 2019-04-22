@@ -30,12 +30,21 @@ passport.deserializeUser(async(id, done) => {
   done(null, user);
 })
 
-module.exports = function(req, res, next) {
-  if (req.user) {
-    next()
-  } else {
-    res.redirect(302, '/login')
-  }
+module.exports = {
+  admin: function(req, res, next) {
+    if (req.user && req.user.isAdmin) {
+      next()
+    } else {
+      res.redirect(302, '/login')
+    }
+  },
+  user: function(req, res, next) {
+    if (req.user) {
+      next()
+    } else {
+      res.redirect(302, '/login')
+    }
+  },
 }
 
 
