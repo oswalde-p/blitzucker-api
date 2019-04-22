@@ -2,6 +2,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 
 const User = require('../models/user')
+const userService = require('../services/user-service')
 
 
 passport.use(new LocalStrategy(
@@ -10,7 +11,7 @@ passport.use(new LocalStrategy(
     User.findOne({ email }).then((user) => {
       if (!user) return done("Bad credentials", null)
 
-      if(email === user.email && password === user.password) {
+      if(email === user.email && userService.comparePassword(email, password)) {
         return done(null, user)
       }
 
