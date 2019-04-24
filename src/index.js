@@ -30,7 +30,7 @@ app.use(session({
   genid: (req) => {
     return uuid()
   },
-  secret: 'shhhh',
+  secret: config.session.SECRET,
   resave: false,
   saveUninitialized: true
 }))
