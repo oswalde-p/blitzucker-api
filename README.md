@@ -1,5 +1,5 @@
 # blitzucker
-A connected diabetes management platform, combining data from a range of sources to give you optimal 
+A connected diabetes management platform, combining data from a range of sources to give you optimal
 control over your health. The ultimate goal is to use *machine learning* (🤮) to make predictions and spot trends better than your shitty brain can.
 
 The project currently consists of 2 parts: this api and a [web frontend](https://github.com/oswalde-p/blitzucker-vue-client).
@@ -8,7 +8,16 @@ The project currently consists of 2 parts: this api and a [web frontend](https:/
 
 An express server responsible for handling requests from various clients, fetching data from external sources and keeping the database up to date. You know, like an api.
 
-It is currently hosted by openshift [here](https://blitzucker-api-blutzucker.1d35.starter-us-east-1.openshiftapps.com/api/~/liveness)
+## development
+
+Clone repo, then:
+
+```
+npm i
+node src/fixture/populate-mock-data.js            # create test admin user { email: "admin@test.com", password: "test"}
+npm run dev
+```
+
 
 ## Data sources
 

@@ -3,14 +3,7 @@ const User = require('../models/user')
 const Entry = require('../models/entry')
 const { timeComparatorNewestFirst } = require('../helpers')
 
-//TODO add authorisation to appropriate functions
-
-router.get('/', async function(req, res) {
-  const users = await User.find()
-  res.send(users)
-})
-
-router.post('/history/', async function(req, res) {
+router.post('/', async function(req, res) {
   const {email} = req.body
   if (email) {
     const user = await User.findOne({email}).populate('history').exec()
@@ -25,7 +18,7 @@ router.post('/history/', async function(req, res) {
   res.send(400)
 })
 
-router.post('/history/update/', async function(req, res){
+router.post('/update/', async function(req, res){
   const { email, data} = req.body
   try {
     const user = await User.findOne({email}).populate('history').exec()

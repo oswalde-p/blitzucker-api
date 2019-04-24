@@ -1,27 +1,19 @@
-const mongoose = require('mongoose')
-const User = require('../models/user')
 const moment = require('moment')
 
-require('dotenv').config()
+const userService = require('../services/user-service')
 
-const mongooseConnectionString = process.env.MONGO_CONNECTION_STRING || 'mongodb://localhost:27017/d6s'
+populate()
 
-console.log(mongooseConnectionString)
-
-mongoose.connect(mongooseConnectionString,async function(err){
-  if (err) {
-    console.log('Error connecting to mongodb')
-    console.error(err)
-  } else {
-    console.log('Mongo connection successful')
-
-    const user = new User( {email: "test-user@test.com", password: "password123" })
-    addRandomHistory(user)
-    user.validate()
-    await user.save()
-    console.log('done')
+async function populate() {
+  const mongo = require('../mongo-connection')
+  try {
+  const user = await userService.createUser('admin@test.com', 'test', true)
+  } catch (err) {
+    if (err.message == 'User already exists') {
+      console.log(`user "admin@test.com" already exists`)
+    }
   }
-})
+}
 
 const addRandomHistory = function(user, hours = 48){
   const now = moment()
