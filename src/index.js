@@ -62,7 +62,7 @@ app.get('/-/liveness', (_, res) => {
   res.sendStatus(500)
 })
 
-app.use('/users', auth['admin'], userRouter)
+app.use('/users', userRouter)
 app.use('/history', auth['user'], historyRouter)
 
 
