@@ -58,12 +58,13 @@ app.post('/login', (req, res, next) => {
 //routes
 app.get('/-/readiness', (_, res) => res.sendStatus(200))
 app.get('/-/liveness', (_, res) => {
-  if(mongoConnection.connection.readyState == 1) return res.sendStatus(200)
+  if(mongoConnection.connected()) return res.sendStatus(200)
   res.sendStatus(500)
 })
 
 app.use('/users', userRouter)
 app.use('/history', auth['user'], historyRouter)
 
+mongoConnection.connect()
 
 app.listen(PORT, r => { console.log(`Server listening on port ${PORT}`)})
