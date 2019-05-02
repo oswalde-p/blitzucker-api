@@ -16,8 +16,8 @@ router.post('/', async function(req, res, next) {
   const { email, password } = req.body
   if (!(email && password)) return res.sendStatus(400)
   try {
-    const success = await userService.createUser(email, password)
-    if (success) return res.sendStatus(200)
+    await userService.createUser(email, password)
+    return res.status(200).send()
   } catch(err) {
     if (err.message == 'User already exists'){
       return res.status(400).send('User already exists')
