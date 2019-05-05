@@ -1,7 +1,8 @@
 const serializeUser = function(user) {
   return { user: {
     id: user._id,
-    email: user.email
+    email: user.email,
+    isAdmin: user.isAdmin
   }}
 }
 

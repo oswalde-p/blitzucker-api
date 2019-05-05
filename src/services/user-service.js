@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const config = require('../config')
 const User = require('../models/user')
 
-const saltRounds = config.SALT_ROUNDS
+const saltRounds = Number(config.SALT_ROUNDS)
 
 async function createUser(email, password, admin) {
   if (await User.findOne({ email })) throw new Error('User already exists')
