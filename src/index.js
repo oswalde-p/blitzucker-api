@@ -14,6 +14,7 @@ const mongoConnection = require('./mongo-connection')
 const auth = require('./middleware/auth')
 const userRouter = require('./routes/user-router')
 const historyRouter = require('./routes/history-router')
+const messageRouter = require('./routes/message-router')
 
 const PORT = config.PORT
 const app = express()
@@ -63,6 +64,7 @@ app.get('/-/liveness', (_, res) => {
 })
 
 app.use('/users', userRouter)
+app.use('/messages', messageRouter)
 app.use('/history', auth['user'], historyRouter)
 
 mongoConnection.connect()
