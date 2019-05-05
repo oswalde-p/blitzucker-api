@@ -7,9 +7,8 @@ const saltRounds = config.SALT_ROUNDS
 
 async function createUser(email, password, admin) {
   if (await User.findOne({ email })) throw new Error('User already exists')
-  bcrypt.hash(password, saltRounds, async (err, passwordHash) => {
-    const user = await User.create({ email, password: passwordHash, isAdmin: !!admin })
-  })
+  const passwordHash = await bcrypt.hash(password, saltRounds)
+  return User.create({ email, password: passwordHash, isAdmin: !!admin })
 }
 
 async function setPassword(email, password){
