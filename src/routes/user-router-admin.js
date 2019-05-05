@@ -5,12 +5,19 @@ const { timeComparatorNewestFirst } = require('../helpers')
 const userService = require('../services/user-service')
 const { serializeUser } = require('../serializers/user-serializer')
 
+//TODO add authorisation to appropriate functions
 
-router.post('/', async function(req, res, next) {
+router.get('/', async function(req, res) {
+  console.log('inside user request handler')
+  const users = await User.find()
+  res.send(users)
+})
+
+router.post('/admin', async function(req, res, next) {
   const { email, password } = req.body
   if (!(email && password)) return res.sendStatus(400)
   try {
-    const user = await userService.createUser(email, password)
+    const user = await userService.createUser(email, password, true)
     return res.status(200).send(serializeUser(user))
   } catch(err) {
     if (err.message == 'User already exists'){
