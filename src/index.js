@@ -15,7 +15,6 @@ const auth = require('./middleware/auth')
 const userRouter = require('./routes/user-router')
 const userRouterAdmin = require('./routes/user-router-admin')
 const historyRouter = require('./routes/history-router')
-const messageRouter = require('./routes/message-router')
 
 const PORT = config.PORT
 const app = express()
@@ -65,8 +64,7 @@ app.get('/-/liveness', (_, res) => {
 })
 
 app.use('/users', userRouter)
-app.use('/users', userRouterAdmin)
-app.use('/messages', messageRouter)
+app.use('/users', auth['admin'], userRouterAdmin)
 app.use('/history', auth['user'], historyRouter)
 
 mongoConnection.connect()
