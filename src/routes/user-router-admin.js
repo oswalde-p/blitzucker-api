@@ -1,7 +1,5 @@
 const router = require('express').Router()
 const User = require('../models/user')
-const Entry = require('../models/entry')
-const { timeComparatorNewestFirst } = require('../helpers')
 const userService = require('../services/user-service')
 const { serializeUser } = require('../serializers/user-serializer')
 
