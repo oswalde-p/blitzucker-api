@@ -4,10 +4,6 @@ control over your health. The ultimate goal is to use *machine learning* (🤮) 
 
 The project currently consists of 2 parts: this api and a [web frontend](https://github.com/oswalde-p/blitzucker-vue-client).
 
-## api
-
-An express server responsible for handling requests from various clients, fetching data from external sources and keeping the database up to date. You know, like an api.
-
 ## development
 
 Clone repo, then:
@@ -18,6 +14,20 @@ node src/fixture/populate-mock-data.js            # create test admin user { ema
 npm run dev
 ```
 
+## authorization
+
+Uses passport and experss-session to manage and authenticate user sessions. There are three access levels for endpoints:
+`user`, `admin` and `public`.
+
+### Example login:
+```
+curl -X POST -H "Content-Type: application/json" -d '{ "email":"admin@test.com", "password":"test" }' http://localhost:3001/login -c "cookie.txt"
+```
+This saves your session id in `cookie.txt". Now you should be able to pass the cookie in future requests, eg
+
+```
+curl -X GET -H "Content-Type: application/json"  http://localhost:3001/history -v -b "cookie.txt"
+```
 
 ## Data sources
 
